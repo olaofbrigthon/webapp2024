@@ -1,0 +1,81 @@
+{% extends 'utils/__nav.html' %}
+{% load custom_filter %}
+{% block content %}
+
+<style>
+
+</style>
+
+{% include 'utils/_deposite_withdraw.html' %}
+
+<!-- Content
+  ============================================= -->
+<div id="content" class="py-4">
+  <div class="container">
+
+    <!-- Steps Progress bar -->
+    <div class="row mt-4 mb-5">
+      <div class="col-lg-11 mx-auto">
+        <div class="row widget-steps">
+          <div class="col-4 step complete">
+            <div class="step-name">Details</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="withdraw-money.html" class="step-dot"></a>
+          </div>
+          <div class="col-4 step active">
+            <div class="step-name">Confirm</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="step-dot"></a>
+          </div>
+          <div class="col-4 step disabled">
+            <div class="step-name">Success</div>
+            <div class="progress">
+              <div class="progress-bar"></div>
+            </div>
+            <a href="#" class="step-dot"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="fw-400 text-center mt-3 mb-4">Withdraw Money</h2>
+    {% include 'utils/_message.html' %}
+    <form id="form-withdraw-money-confirm" method="post">
+      
+      {% csrf_token %}
+      <div class="row">
+        
+        <div class="col-md-9 col-lg-7 col-xl-6 mx-auto">
+          <!-- Withdraw Money Confirm -->
+          <div class="bg-white shadow-sm rounded p-3 pt-sm-5 pb-sm-5 px-sm-5 mb-4">
+            <p class="lead text-center alert alert-info">Withdraw money<br> to<br>
+              <!-- Display bank account as plain text -->
+              <span class="fw-300"> <b>{{ bank_account }}</b>
+              </span>
+            </p>
+            <!-- Display amount as plain text -->
+            <p class="mb-2 mt-4">Amount to Withdraw <span class="text-3 float-end">${{ form.amount.value }}</span></p>
+            
+
+          
+            <hr>
+            <p class="text-4 fw-500">Balance<span class="float-end">{{ online_account.balance|subtract:form.amount.value }}</span></p>
+            <!-- Hidden input fields to store the field values -->
+            <input type="hidden" name="amount" value="{{ form.amount.value }}">
+            <input type="hidden" name="bank_account" value="{{ form.bank_account.value }}">
+            <div class="d-grid"><button type="submit" class="btn btn-primary">Withdraw Money</button></div>
+          </div>
+          <!-- Withdraw Money Confirm end -->
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+<!-- Content end -->
+
+
+{% endblock content %}
