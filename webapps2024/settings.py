@@ -86,10 +86,15 @@ WSGI_APPLICATION = "webapps2024.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'server3',
+        'USER': 'adim',
+        'PASSWORD': 'Moyosore123',
+        'HOST': 'localhost',  # Corrected spelling
+        'PORT': '',  # Empty string for default PostgreSQL port
     }
 }
 
